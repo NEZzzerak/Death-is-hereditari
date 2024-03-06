@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public RectTransform valueRectTransform;
     public GameObject gameplayUI;
     public GameObject gameOverScreen;
+    public GameObject aidKit;
 
     private float _maxValue;
     private void Start()
@@ -36,5 +37,12 @@ public class PlayerHealth : MonoBehaviour
     private void DrawHealthBar()
     {
         valueRectTransform.anchorMax = new Vector2(value / _maxValue, 1);
+    }
+    public void AddHealth(float amount)
+    {
+        value += amount;
+        value = Mathf.Clamp(value, 0, _maxValue);
+        DrawHealthBar();
+        Destroy(aidKit);
     }
 }
